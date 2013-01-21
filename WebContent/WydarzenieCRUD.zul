@@ -1,0 +1,47 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk>
+    <window title="Wydarzenie CRUD" border="normal" id="WydarzenieCRUD"
+        width="430px" height="auto" apply="org.zkoss.bind.BindComposer"
+        minimizable="false" mode="modal" maximizable="false" closable="true" position="center"
+        viewModel="@id('vm') @init('appVM.WydarzenieCRUDVM')">
+        <separator />
+        <label value="Informacje o wydarzeniu" />
+        <separator />
+        <panel width="100%">
+            <panelchildren>
+                <separator />
+                <grid width="99.5%">
+                    <columns>
+                        <column label="" width="150px" />
+                        <column label="" />
+                    </columns>
+                    <rows>
+                        <row>
+                            <hbox>
+                                <label value="Data" />
+                            </hbox>
+                            <datebox name="data"
+                                value="@bind(vm.selectedWydarzenie.data)" cols="20" format="dd-MM-yyyy" />
+                        </row>
+                        <row>
+                            <hbox>
+                                <label value="Wydarzenie" />
+                            </hbox>
+                            <textbox name="event"
+                                value="@bind(vm.selectedWydarzenie.event)" cols="20" />
+                        </row>
+                    </rows>
+                </grid>
+            </panelchildren>
+        </panel>
+        <separator />
+        <div align="center">
+            <button id="submit" label="Submit"
+                onClick="@command('save')" />
+            <button id="cancel" label="Cancel"
+                onClick="@command('closeThis')" />
+        </div>
+    </window>
+</zk>
+
+

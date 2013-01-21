@@ -1,0 +1,58 @@
+<?page title="WydarzeniaList" contentType="text/html;charset=UTF-8"?>
+<zk>
+
+    <style>
+    
+        .fimageedit 
+        { 
+            width: 25px; background-image:    url('./images/icon-edit.png'); 
+            background-repeat: no-repeat;
+            border: 0 none; 
+            cursor: pointer; 
+        }
+
+        .fimageDelete 
+        { 
+            width: 25px; background-image: url('./images/icon-trash-red.png'); 
+            background-repeat: no-repeat; 
+            border: 0 none; 
+            cursor: pointer; 
+        }
+
+    </style>
+    
+    <window title="Lista Wydarzen" border="normal"
+        apply="org.zkoss.bind.BindComposer"
+        viewModel="@id('myvm') @init('appVM.WydarzenieListVM')">
+
+        <div>
+            <button label="Dodaj nowe wydarzenie"
+                onClick="@command('addNewWydarzenie')" />
+        </div>
+        <separator />
+        <listbox id="test" model="@load(myvm.allWydarzenia)"
+            selectedItem="@bind(myvm.curSelectedWydarzenie)">
+            <listhead sizable="true">
+                <listheader label="Data" width="400px"
+                    sort="auto(data)" />
+                <listheader label="Wydarzenie" width="400px"
+                    sort="auto(event)" />
+                <listheader label="Action" />
+            </listhead>
+            <template name="model" var="p1">
+                <listitem>
+                    <listcell label="@load(p1.data) @converter('formatedDate', format='dd-MM-yyyy')"/>
+                    <listcell label="@load(p1.event)" />
+                    <listcell>
+                        <hbox spacing="20px">
+                            <image sclass="fimageDelete"
+                                onClick="@command('deleteThisWydarzenie')" />
+                            <image sclass="fimageedit"
+                                onClick="@command('editThisWydarzenie')" />
+                        </hbox>
+                    </listcell>
+                </listitem>
+            </template>
+        </listbox>
+    </window>
+</zk>
